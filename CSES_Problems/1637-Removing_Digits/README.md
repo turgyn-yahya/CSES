@@ -140,22 +140,20 @@ bool isbig(char x){return x >= 65 && x <= 90;}
 bool issmall(char x){return x >= 97 && x <= 122;}
 int sumof(int x){return ((x*(x+1))/2);}
 
-
+int dp[M];
 void solve(){
     ll n;
     cin >> n;
-    int cnt = 0;
-    while(n > 0){
-        int u = 0;
-        int x = n;
+    for(int i=1;i <= n;i++){
+        dp[i] = mod;
+        int x = i;
         while(x > 0){
-            u = max(u,x%10);
+            int dig = x%10;
+            dp[i] = min(dp[i],dp[i-dig]+1);
             x/=10;
         }
-        n-=u;
-        cnt++;
     }
-    cout << cnt;
+    cout << dp[n];
 }
 
 main() {
